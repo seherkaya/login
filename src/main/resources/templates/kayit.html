@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style type="text/css">
+        body{
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            background-color-size: cover;
+            background-attachment: fixed;
+
+        }
+    .container {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        background-color: lightblue;
+        padding-bottom: 50px ;
+        padding-top: 50px ;
+        margin-left: 50px ;
+        margin-right: 500px ;
+        }
+
+    .container2 {
+
+        }
+        .input-block-level{
+            display: flex;
+    margin:10px.0px.0px.0px;
+        }
+        .btn{margin:5px.5px.5px.20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <form class="form-signin">
+            <h1> Kayıt Formu</h1>
+                <div class="container2">
+                    <div class="col">
+                        <input id="name" name="name" type="name" class="input-block-level" placeholder="Name *">
+                    </div>
+                    <div class="col">
+                        <input id="lastName" name="lastName" type="lastName" class="input-block-level" placeholder="Surname">
+                    </div>
+                    <div class="col">
+                        <input id="email" name="email" type="email" class="input-block-level" placeholder="Email Address">
+                    </div>
+                    <div class="col">
+                        <input id="password" name="password" type="password" class="input-block-level" placeholder="Password">
+                    </div>
+                    <div class="col">
+                        <input id="password2" type="password" class="input-block-level" placeholder="Password">
+                    </div>
+                    <div class="col">
+                        <input id="phone" name="phone" type="phone" class="input-block-level" placeholder="Phone">
+                    </div>
+                    <div class="col" >
+                        <button id="submit" class="btn btn-large btn-primary" type="submit" text-align="rigt">Register</button>
+                    </div>
+                </div>
+        </form>
+    </div>
+    <script>
+
+            $(document).ready( function () {
+
+                    $("#submit").click(function() {
+                        $(".error").hide();
+                        var hasError = false;
+                        var passwordVal = $("#password").val();
+                        var checkVal = $("#password2").val();
+                        // if (passwordVal.length < 8 || passwordVal.length < 8) {
+                        //     $("#password").after('<span class="error">Lütfen paralonızı 8 karakterdem fazla girin.</span>');
+                        //     hasError = true;
+                        // }
+                        if (passwordVal == '') {
+                            $("#password").after('<span class="error">Lütfen paralonızı giriniz.</span>');
+                            hasError = true;
+
+                        }else if (checkVal == '') {
+                            $("#password2").after('<span class="error">Lütfen paralonızı tekrar giriniz.</span>');
+                            hasError = true;
+                        } else if (passwordVal != checkVal ) {
+                            $("#password2").after('<span class="error">Parolanız eşleşmedi.</span>');
+                            hasError = true;
+                        }
+                        else if(hasError == true) {return false;}
+                        else {
+                            var user ={"name":$("#name").val(),
+                                "lastName":$("#lastName").val(),
+                                 "email":$("#email").val(),
+                                 "password":$("#password").val(),
+                                 "phone":$("#phone").val() };
+                            $.ajax({
+                                url: 'http://localhost:8080/yeniKullaniciAPI',
+                                contentType: 'application/json',
+                                data: JSON.stringify(user) ,
+                                dataType: 'json',
+                                success: function(data){
+                                    console.log("device control succeeded");
+                                },
+                                error: function(){
+                                    console.log("Device control failed");
+                                },
+                                processData: false,
+                                type: 'POST',
+
+                            });
+                        }
+                    });
+                });
+        // $( "#result" ).html( data );
+
+    </script>
+</body>
+</html>
+

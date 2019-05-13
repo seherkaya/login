@@ -1,0 +1,91 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.1/ui-bootstrap-tpls.js"></script>
+    <script src="app.js"></script>
+
+    <style>
+        .st-sort-ascent:before{
+            content: '\25B2';
+        }
+
+        .st-sort-descent:before{
+            content: '\25BC';
+        }
+        body {
+            font-family: open-sans;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body ng-app="TestApp" ng-controller="testController">
+<div class="container">
+    <div ng-include="'../header-ads.html'"></div>
+    <div class="row well">
+        <button type="button" class="btn btn-info pull-right" ng-click="addRecord()"><i class="glyphicon glyphicon-plus">
+        </i> Add New USer</button>
+    </div>
+    <table st-table="display_records"  st-safe-src="user" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Profile</th>
+            <th width="100px">Name</th>
+            <th st-sort="lastName">Last Name</th>
+            <th>E-Mail</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <th colspan="5">
+                <input st-search placeholder="Name search" class="input-sm form-control" type="search"/>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in display_records">
+            <td><img class="img-thumbnail img-responsive" alt="image" src="@{/images/b="user.jpg" style="width: 50px; height: 50px;"/></td>
+
+            <td><label id="lb_name"></label ></td>
+            <td><label id="lb_lastName"></label></td>
+            <td><label iid="lb_email"></label></td>
+            <td>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-info" ng-click="viewRecord(row.id)"><i class="glyphicon glyphicon-search">
+                    </i></button>
+                    <button type="button" class="btn btn-default" ng-click="editRecord(row.id)"><i class="glyphicon glyphicon-pencil">
+                    </i></button>
+                    <button type="button" class="btn btn-danger" ng-click="deletRecord(row.id)"><i class="glyphicon glyphicon-trash">
+                    </i></button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5" class="text-center">
+                <div st-pagination="" st-items-by-page="itemsByPage"></div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    <div class="col-sm-10" style="margin:30px 0px 50px 0px;">
+    </div>
+    <div ng-include="'../footer-ads.html'"></div>
+</div>
+</body>
+    <script>
+            var user ={};
+
+        $(document).onload(function(){
+            $.get("ku", function(data, status){
+                $.("#lb_name") = data.
+                $.("#lb_lastName") =data
+                $.("#lb_email") = data
+
+            });
+        });
+    </script>
+</html>

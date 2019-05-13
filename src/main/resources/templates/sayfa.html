@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div id="result">
+    <table id="userTable">
+        <tr>
+            <th id ="name0" data-filter-value ="name ">Ad </th>
+            <th id ="lastName0" data-filter-value ="lastName ">Soyad </th>
+            <th id ="email0" data-filter-value ="email ">E-Mail </th>
+            <th id ="active0" data-filter-value ="active ">Aktif </th>
+        </tr>
+        <tr>
+            <th id ="name1" data-filter-value ="name ">Ad </th>
+            <th id ="lastName1" data-filter-value ="lastName ">Soyad </th>
+            <th id ="email1" data-filter-value ="email ">E-Mail </th>
+            <th id ="active1" data-filter-value ="active ">Aktif </th>
+        </tr>
+        <tr>
+            <th id ="name2" data-filter-value ="name ">Ad </th>
+            <th id ="lastName2" data-filter-value ="lastName ">Soyad </th>
+            <th id ="email2" data-filter-value ="email ">E-Mail </th>
+            <th id ="active2" data-filter-value ="active ">Aktif </th>
+
+        </tr>
+
+    </table>
+</div>
+
+<script>
+    var table = $('<table>');
+    var tempTr,tempTd;
+    $(document).ready( function () {
+        $.post( "http://localhost:8080/kullaniciIslemleriAPI?name=Ahmet&type=3", function( data ) {
+            console.log(JSON.parse(data))
+            var user =JSON.parse(data)
+            console.log(user.length)
+            var html="";
+            for(i=0;i<user.length;i++) {
+                console.log(i)
+                console.log(user[i].name)
+                console.log(user[i].email)
+                console.log(user[i])
+                console.log(user[i].active)
+                document.getElementById("name"+i).innerHTML= user[i].name;
+                document.getElementById("lastName"+i).innerHTML = user[i].lastName;
+                document.getElementById("email"+i).innerHTML = user[i].email;
+                document.getElementById("active"+i).innerHTML = user[i].active;
+
+            }
+            // $( "#result" ).html( data );
+        })
+    })
+
+
+
+</script>
+
+</body>
+</html>

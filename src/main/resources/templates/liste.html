@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Liste</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<h1> Liste </h1>
+<script>
+
+    $(document).ready(function () {
+        $.ajax({
+            url: 'http://localhost:8080/listeApi',
+
+            contentType: 'application/json',
+            data: JSON.stringify({name:"Ahmet"}) ,
+            dataType: 'json',
+            success: function(data){
+                var status ;
+                data.json().parse(data)
+                var str = JSON.parse(data)
+                if(status== 0)
+                console.log("device control succeeded");
+            },
+            error: function(){
+                console.log("Device control failed");
+            },
+            processData: false,
+            type: 'POST',
+
+        });
+    });
+</script>
+</body>
+
+</html>
