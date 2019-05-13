@@ -29,10 +29,14 @@ public class UserService {
         return userRepository.findByEmail( email );
     }
 
+    public User findUserByID(int id) {
+        return userRepository.findById( id );
+    }
+
     public List<User> findUserByName(String name) {
 
-        List<User> user= userRepository.findByName( name );
-        for(int i=0; i<user.size();i++){
+        List<User> user = userRepository.findByName( name );
+        for (int i = 0; i < user.size(); i++) {
             user.get( i ).setPassword( "" );
 
         }
@@ -41,8 +45,8 @@ public class UserService {
 
     public List<User> findAllUser() {
 
-        List<User> user= userRepository.findAll();
-        for(int i=0; i<user.size();i++){
+        List<User> user = userRepository.findAll();
+        for (int i = 0; i < user.size(); i++) {
             user.get( i ).setPassword( "" );
         }
 
@@ -61,20 +65,23 @@ public class UserService {
         return userRepository.save( user );
     }
 
-    public User updateUser(String name, String lastName, String email, String password, int active) {
-
-        User user = userRepository.findByEmail( email );
-
-        if (user.getEmail() != email) {
+    public User updateUser(String name, String lastName, String email, String password, String phone, int active) {
+        User user = new User();
+        if (name != null)
             user.setName( name );
+        if (lastName != null)
             user.setLastName( lastName );
+        if (email != null)
+            user.setEmail( email );
+        if (password != null)
             user.setPassword( password );
+        if (phone != null)
+            user.setPhone( phone );
+        if (active != 1 || active != 0)
             user.setActive( active );
 
-            return userRepository.save( user );
-        } else {
-            return user;
-        }
+        return userRepository.save( user );
+
     }
 
     public List<User> getByNameUser(String name) {

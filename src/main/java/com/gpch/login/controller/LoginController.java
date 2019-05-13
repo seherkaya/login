@@ -121,31 +121,29 @@ public class LoginController {
                               @RequestParam(required = false, value = "email") String email,
                               @RequestParam(required = false, value = "password") String password,
                               @RequestParam(required = false, value = "phone") String phone
-                              /*@RequestBody User user*/) {
+            /*@RequestBody User user*/) {
 
-       // List<User> userExists = userService.findUserByName( user.getName() ); //For @RequestBody
+        // List<User> userExists = userService.findUserByName( user.getName() ); //For @RequestBody
         List<User> userExists = userService.findUserByName( name );
-        List<User> allUser =userService.findAllUser();
+        List<User> allUser = userService.findAllUser();
+
         if (name != null) {
 
             return new Gson().toJson( userExists );
 
-        } else if(allUser != null){
-
+        } else if (allUser != null) {
 
             return new Gson().toJson( allUser );
-        }
 
-        else {
+        } else {
+
             ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setSuccessful( true );
+            apiResponse.setSuccessful( false );
             return new Gson().toJson( apiResponse );
 
-
         }
-
-
     }
+
     @RequestMapping(value = "/guncelle", method = RequestMethod.GET)
     public String guncelle() {
         return "guncelle";
@@ -153,28 +151,28 @@ public class LoginController {
 
     // return new Gson().toJson( user );
     @ResponseBody //This annotation provides to return String from method
-    @RequestMapping(value = "/guncelleAPI", method = RequestMethod.PUT)
-    public String guncelle (@RequestParam(required = false, value = "name") String name,
-                              @RequestParam(required = false, value = "lastName") String lastName,
-                              @RequestParam(required = false, value = "email") String email,
-                              @RequestParam(required = false, value = "password") String password,
-                              @RequestParam(required = false, value = "phone") String phone
-            /*@RequestBody User user*/) {
+    @RequestMapping(value = "/guncelleAPI", method = RequestMethod.POST)
 
-        // List<User> userExists = userService.findUserByName( user.getName() ); //For @RequestBody
-        User userExists = userService.findUserByEmail( email);
+    public String guncelle(@RequestParam(value = "id") int id,
+                           @RequestParam(required = false, value = "name") String name,
+                           @RequestParam(required = false, value = "lastName") String lastName,
+                           @RequestParam(required = false, value = "email") String email,
+                           @RequestParam(required = false, value = "password") String password,
+                           @RequestParam(required = false, value = "phone") String phone,
+                           @RequestParam(required = false, value = "phone") int active
 
-        if (userExists != null) {
-            int id = userExists.getId();
-
-            return new Gson().toJson( userExists );
-
-        }
-        else {
+                           ) {
+        User user =userService.findUserByID(id);
+        if(user != null){
+            userService.updateUser(name,lastName,email,password,phone,active);
             ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setSuccessful( true );
+            apiResponse.setSuccessful( false );
             return new Gson().toJson( apiResponse );
-
+        }
+        else{
+            ApiResponse apiResponse = new ApiResponse();
+            apiResponse.setSuccessful( false );
+            return new Gson().toJson( apiResponse );
 
         }
 
