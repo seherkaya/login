@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">
+    <!--https://stackoverflow.com/questions/45178497/create-div-in-for-loop-with-number
+    --><meta charset="UTF-8">
     <title>Liste</title>
-
+    <script src=”js/jquery.js” type=”text/javascript”></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -148,9 +148,9 @@
         </div>
         <!--HEAD AND SEARCH-->
         <!--USER INFO START-->
-        <!--<div class="row-sm-6 fullrow12">
+        <div class="row-sm-6 fullrow12">
 
-            &lt;!&ndash;Start Loop&ndash;&gt;
+            <!--Start Loop
             <div class="col-sm-1 fullcol21" style="border-style: groove;padding: 0px;">
 
                 <div class="row-sm4 rowforUser">
@@ -214,8 +214,8 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        </div>-->
+            </div>-->
+        </div>
 
 
         <!--for list and edit -->
@@ -315,21 +315,23 @@
         }
     ]
     $(document).ready(function () {
-        var temp =
+        var temp = "";
         for (var i in data) {
-             temp = ""
-            temp += '<div class="col-sm-1 fullcol2'+i+'"'+'style="border-style: groove;padding: 0px;">';
-            temp += '<div class="row-sm4 rowforUser">';
-            temp +="AD:"+ data[i].name;
-            temp +="SOYAD:"+data[i].lastName;
-            temp +="</div>";
-            temp +="</div>";
-
-            var tempDiv =temp;
-
+            temp = ""
+            temp += "<div>";
+            temp += "<div>";
+            temp += "AD:" + data[i].name;
+            temp += "SOYAD:" + data[i].lastName;
+            temp += "Email:" + data[i].email;
+            temp += "Telefon:" + data[i].phone;
+            temp += "</div>";
+            temp += "</div>";
+            console.log(temp)
+            var tempDiv = temp;
+            $('<div class="row-sm-6 fullrow12">').html = tempDiv;
 
         }
-        div.innerHTML=tempDiv;
+
 
         function findByName() {
 
