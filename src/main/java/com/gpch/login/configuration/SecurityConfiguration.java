@@ -56,6 +56,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/yeniKullaniciAPI").permitAll()
                 .antMatchers("/liste").permitAll()
                 .antMatchers("/listeAPI").permitAll()
+
+                .antMatchers("/guncelle").permitAll()
+                .antMatchers("/guncelleAPI").permitAll()
+                .antMatchers("/sil").permitAll()
+                .antMatchers("/silAPI").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")

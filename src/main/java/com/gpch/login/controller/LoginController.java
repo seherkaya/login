@@ -80,30 +80,8 @@ public class LoginController {
     // return new Gson().toJson( user );
     @ResponseBody //This annotation provides to return String from method
     @RequestMapping(value = "/yeniKullaniciAPI", method = RequestMethod.POST)
-    public String kullaniciOlustur(@RequestParam(required = false, value = "name") String name,
-                                   @RequestParam(required = false, value = "lastName") String lastName,
-                                   @RequestParam(required = false, value = "email") String email,
-                                   @RequestParam(required = false, value = "password") String password,
-                                   @RequestParam(required = false, value = "phone") String phone,
-                                   @RequestBody User user) {
-
-
-        User userExists = userService.findUserByEmail( user.getEmail() );
-
-        if (userExists != null) {
-            ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setSuccessful( false );
-            return new Gson().toJson( apiResponse );
-
-        } else {
-
-            user = userService.saveUser( user );
-
-            ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setSuccessful( true );
-            apiResponse.setData( user );
-            return new Gson().toJson( apiResponse );
-        }
+    public String kullaniciOlustur(@RequestBody User user) {
+        return new Gson().toJson( userService.saveUser( user ) );
     }
 
 
@@ -116,32 +94,8 @@ public class LoginController {
     // return new Gson().toJson( user );
     @ResponseBody //This annotation provides to return String from method
     @RequestMapping(value = "/listeAPI", method = RequestMethod.POST)
-    public String listeDondur(@RequestParam(required = false, value = "name") String name,
-                              @RequestParam(required = false, value = "lastName") String lastName,
-                              @RequestParam(required = false, value = "email") String email,
-                              @RequestParam(required = false, value = "password") String password,
-                              @RequestParam(required = false, value = "phone") String phone
-            /*@RequestBody User user*/) {
-
-        // List<User> userExists = userService.findUserByName( user.getName() ); //For @RequestBody
-        List<User> userExists = userService.findUserByName( name );
-        List<User> allUser = userService.findAllUser();
-
-        if (name != null) {
-
-            return new Gson().toJson( userExists );
-
-        } else if (allUser != null) {
-
-            return new Gson().toJson( allUser );
-
-        } else {
-
-            ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setSuccessful( false );
-            return new Gson().toJson( apiResponse );
-
-        }
+    public String listeDondur(@RequestParam(required = false, value = "name") String name) {
+        return new Gson().toJson( userService.searchAll( name ) );
     }
 
     @RequestMapping(value = "/guncelle", method = RequestMethod.GET)
@@ -161,15 +115,14 @@ public class LoginController {
                            @RequestParam(required = false, value = "phone") String phone,
                            @RequestParam(required = false, value = "phone") int active
 
-                           ) {
-        User user =userService.findUserByID(id);
-        if(user != null){
-            userService.updateUser(name,lastName,email,password,phone,active);
+    ) {
+        User user = userService.findUserByID( id );
+        if (user != null) {
+            userService.updateUser(  id, name, lastName, email, password, phone, active );
             ApiResponse apiResponse = new ApiResponse();
             apiResponse.setSuccessful( false );
             return new Gson().toJson( apiResponse );
-        }
-        else{
+        } else {
             ApiResponse apiResponse = new ApiResponse();
             apiResponse.setSuccessful( false );
             return new Gson().toJson( apiResponse );
@@ -178,6 +131,46 @@ public class LoginController {
 
 
     }
+
+    @RequestMapping(value = "/sil", method = RequestMethod.GET)
+    public String sil() {
+        return "sil";
+    }
+
+    // return new Gson().toJson( user );
+    @ResponseBody //This annotation provides to return String from method
+    @RequestMapping(value = "/silAPI", method = RequestMethod.POST)
+    public String sil(@RequestParam(value = "id") int id,
+                      @RequestParam(required = false, value = "name") String name,
+                      @RequestParam(required = false, value = "lastName") String lastName,
+                      @RequestParam(required = false, value = "email") String email,
+                      @RequestParam(required = false, value = "password") String password,
+                      @RequestParam(required = false, value = "phone") String phone,
+                      @RequestParam(required = false, value = "phone") int active
+    ) {
+        User user = userService.findUserByID( id );
+        if (user != null) {
+            boolean i = userService.deleteUser( id );
+            if (i == true) {
+                ApiResponse apiResponse = new ApiResponse();
+                apiResponse.setSuccessful( true );
+                return new Gson().toJson( apiResponse );
+            } else {
+                ApiResponse apiResponse = new ApiResponse();
+                apiResponse.setSuccessful( false );
+                return new Gson().toJson( apiResponse );
+
+            }
+        } else {
+            ApiResponse apiResponse = new ApiResponse();
+            apiResponse.setSuccessful( false );
+            return new Gson().toJson( apiResponse );
+
+        }
+
+
+    }
+
 }
 
 

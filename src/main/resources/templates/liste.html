@@ -8,27 +8,344 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <style type="text/css">
+
+        html, body {
+            background-color: #dddddd;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            vertical-align: middle;
+
+        }
+        #myInput {
+            background-image: url('/css/searchicon.png');
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 5px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+        a.btn:hover {
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -o-transform: scale(1.1);
+        }
+        a.btn {
+            -webkit-transform: scale(0.8);
+            -moz-transform: scale(0.8);
+            -o-transform: scale(0.8);
+            -webkit-transition-duration: 0.5s;
+            -moz-transition-duration: 0.5s;
+            -o-transition-duration: 0.5s;
+        }
+
+
+        .fullmain {
+
+            height: 100%
+        }
+
+        .fullcol11 {
+
+            height: 100%
+
+
+        }
+
+        .fullcol13 {
+
+            height: 100%
+
+        }
+
+        .fullcol12 {
+
+            height: 100%
+
+        }
+
+        .fullrow11 {
+
+            height: 26%;
+            text-align: center;
+        }
+
+        .fullrow12 {
+            display: flex;
+            height: 48%;
+            vertical-align: super;
+            text-align: center;
+        }
+
+        .fullrow13 {
+            display: flex;
+            height: 26%;
+            vertical-align: super;
+            text-align: center;
+        }
+        .head1 {
+            vertical-align: center;
+            horiz-align: center;
+            text-align: center;
+        }
+
+        .rowforUser:nth-child(odd) {
+            padding: 0px;
+            color: #000000;
+            background: #efefef;
+        }
+
+        .rowforUser:nth-child(even) {
+            color: #dddddd;
+            background: #f2f2f2;
+        }
+
+        .findByName {
+            padding-bottom: auto;
+        }
+        .blank{
+            height: 50%;
+
+        }
+        .headMain{
+            height: 25%;
+        }
+        .userSearch{
+            height: 25%;
+        }
+
+    </style>
 
 </head>
 <body>
-<h1> Liste </h1>
-<script>
+<div class="row fullmain">
 
+    <div class="col-sm-1 fullcol11">
+
+    </div>
+    <div class="col-sm-10 fullcol12">
+
+        <!--HEAD AND SEARCH-->
+        <div class="row-sm-3 fullrow11">
+
+            <div class="row-sm-8 blank">
+
+            </div>
+            <div class="row-sm-2 headMain">
+                <h1 class="head1">KULLANICI LİSTESİ</h1>
+            </div>
+
+            <div class="row-sm-2 userSearch">
+                <input class="findByName" type="text" id="myInput" onkeyup="findByName()"
+                       placeholder="Search for names.." style="border-style: groove">
+            </div>
+        </div>
+        <!--HEAD AND SEARCH-->
+        <!--USER INFO START-->
+        <div class="row-sm-6 fullrow12">
+
+            <!--Start Loop-->
+            <div class="col-sm-1 fullcol21" style="border-style: groove;padding: 0px;">
+
+                <div class="row-sm4 rowforUser">
+                    <div name="forUserNo">
+                        user no
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3 fullcol22" style="border-style: groove;padding: 0px;">
+
+                <div class="row-sm4 rowforUser">
+                    <div name="forUserInfo">
+                        for user name surname
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3 fullcol23"  style="border-style: groove;padding: 0px;">
+
+                <div class="row-sm4 rowforUser">
+                    <div name="forUserMailInfo">
+                        for user mail
+                    </div>
+                    <div name="forUserInfo">
+                        for user mail
+                    </div>
+                    <div name="forUserInfo">
+                        for user mail
+                    </div>
+                    <div name="forUserInfo">
+                        for user mail
+                    </div>
+                    <div name="forUserInfo">
+                        for user mail
+                    </div>
+                    <div name="forUserInfo">
+                        for user mail
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 fullcol24"  style="border-style: groove;padding: 0px;">
+
+                <div class="row-sm rowforUser">
+                    <div name="forUserPhoneInfo">
+                        for user phone
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 fullcol25" style="border-style: groove;padding: 0px;">
+
+                <div class="row-sm4 rowforUser">
+                    <div name="forUserInfo">
+                        <a href="#" class="btn btn-primary a-btn-slide-text">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            <span><strong>Edit</strong></span>
+                        </a>
+                        <a href="#" class="btn btn-primary a-btn-slide-text">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span><strong>Delete</strong></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--for list and edit -->
+
+    </div>
+    <!--USER INFO END-->
+    <div class="row-sm-3 fullrow13">
+
+    </div>
+
+</div>
+<div class="col-sm-1 fullcol13">
+
+</div>
+</div>
+
+
+<script>
+    var data = [
+        {
+            "id": 1,
+            "email": "12345@12345.com",
+            "name": "12345",
+            "lastName": "12345",
+            "phone": "+905342002630",
+            "active": 1,
+            "roles": [
+                {
+                    "id": 1,
+                    "role": "ADMIN"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "email": "test@test.com",
+            "name": "Seher",
+            "lastName": "Kaya",
+            "phone": "+905426591210",
+            "active": 1,
+            "roles": [
+                {
+                    "id": 1,
+                    "role": "ADMIN"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "email": "deneme@test.com",
+            "name": "Ahmet",
+            "lastName": "Mehmet",
+            "phone": "+905369541614",
+            "active": 1,
+            "roles": [
+                {
+                    "id": 1,
+                    "role": "ADMIN"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "email": "deneme@deneme.tr",
+            "name": "deneme",
+            "lastName": "deneme1",
+            "phone": "+905369541614",
+            "active": 0,
+            "roles": []
+        },
+        {
+            "id": 8,
+            "email": "test@test.co",
+            "name": "Ahmet",
+            "lastName": "mehmet",
+            "phone": "+905369541614",
+            "active": 1,
+            "roles": []
+        },
+        {
+            "id": 9,
+            "email": "test@test.trr",
+            "name": "Ahmet",
+            "lastName": "Veli",
+            "phone": "+905369541614",
+            "active": 1,
+            "roles": []
+        },
+        {
+            "id": 18,
+            "email": "2332@2343",
+            "name": "seher",
+            "lastName": "asad",
+            "phone": "1236522",
+            "active": 0,
+            "roles": []
+        }
+    ]
     $(document).ready(function () {
+        function findByName() {
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            div = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
         $.ajax({
             url: 'http://localhost:8080/listeApi',
 
             contentType: 'application/json',
-            data: JSON.stringify({name:"Ahmet"}) ,
+            data: JSON.stringify({name: "Ahmet"}),
             dataType: 'json',
-            success: function(data){
-                var status ;
+            success: function (data) {
+                var status;
                 data.json().parse(data)
                 var str = JSON.parse(data)
-                if(status== 0)
-                console.log("device control succeeded");
+                if (status == 0)
+                    console.log("device control succeeded");
             },
-            error: function(){
+            error: function () {
                 console.log("Device control failed");
             },
             processData: false,
@@ -38,5 +355,3 @@
     });
 </script>
 </body>
-
-</html>
