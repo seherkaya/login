@@ -23,7 +23,6 @@
 
         }
         #myInput {
-            background-image: url('/css/searchicon.png');
             background-position: 10px 12px;
             background-repeat: no-repeat;
             width: 100%;
@@ -149,9 +148,9 @@
         </div>
         <!--HEAD AND SEARCH-->
         <!--USER INFO START-->
-        <div class="row-sm-6 fullrow12">
+        <!--<div class="row-sm-6 fullrow12">
 
-            <!--Start Loop-->
+            &lt;!&ndash;Start Loop&ndash;&gt;
             <div class="col-sm-1 fullcol21" style="border-style: groove;padding: 0px;">
 
                 <div class="row-sm4 rowforUser">
@@ -216,7 +215,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
 
         <!--for list and edit -->
@@ -316,23 +315,27 @@
         }
     ]
     $(document).ready(function () {
-        function findByName() {
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            div = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
+        var temp =
+        for (var i in data) {
+             temp = ""
+            temp += '<div class="col-sm-1 fullcol2'+i+'"'+'style="border-style: groove;padding: 0px;">';
+            temp += '<div class="row-sm4 rowforUser">';
+            temp +="AD:"+ data[i].name;
+            temp +="SOYAD:"+data[i].lastName;
+            temp +="</div>";
+            temp +="</div>";
+
+            var tempDiv =temp;
+
+
         }
-        $.ajax({
+        div.innerHTML=tempDiv;
+
+        function findByName() {
+
+        }
+
+        /*$.ajax({
             url: 'http://localhost:8080/listeApi',
 
             contentType: 'application/json',
@@ -351,7 +354,7 @@
             processData: false,
             type: 'POST',
 
-        });
+        });*/
     });
 </script>
 </body>
