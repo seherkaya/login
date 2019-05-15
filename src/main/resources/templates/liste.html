@@ -28,7 +28,6 @@
             width: 100%;
             font-size: 16px;
             padding: 12px 20px 5px 40px;
-            border: 1px solid #ddd;
             margin-bottom: 12px;
         }
         a.btn:hover {
@@ -89,23 +88,45 @@
             vertical-align: super;
             text-align: center;
         }
+
+        .fullcol21 {
+            padding: 0;
+            table-layout: fixed;
+            box-sizing: border-box;
+        }
+
+        .full-height {
+            height: 100%;
+        }
         .head1 {
             vertical-align: center;
             horiz-align: center;
             text-align: center;
         }
 
-        .rowforUser:nth-child(odd) {
+        .rowUserInfo {
+            padding: 0px;
+            color: #000000;
+            background: #efefef;
+            min-height: inherit;
+            max-height: inherit;
+        }
+
+        .rowUserInfo:hover {
+            background: #f5f5f5;
+
+        }
+
+        .rowUserInfo:nth-child(odd) {
             padding: 0px;
             color: #000000;
             background: #efefef;
         }
 
-        .rowforUser:nth-child(even) {
-            color: #dddddd;
-            background: #f2f2f2;
+        .rowUserInfo:nth-child(even) {
+            color: #000000;
+            background: #bfbfbf;
         }
-
         .findByName {
             padding-bottom: auto;
         }
@@ -119,17 +140,15 @@
         .userSearch{
             height: 25%;
         }
-
     </style>
-
 </head>
 <body>
 <div class="row fullmain">
 
-    <div class="col-sm-1 fullcol11">
+    <div class="col-sm-2 fullcol11">
 
     </div>
-    <div class="col-sm-10 fullcol12">
+    <div class="col-sm-8 fullcol12">
 
         <!--HEAD AND SEARCH-->
         <div class="row-sm-3 fullrow11">
@@ -143,91 +162,28 @@
 
             <div class="row-sm-2 userSearch">
                 <input class="findByName" type="text" id="myInput" onkeyup="findByName()"
-                       placeholder="Search for names.." style="border-style: groove">
+                       placeholder="Search for names..">
             </div>
         </div>
         <!--HEAD AND SEARCH-->
         <!--USER INFO START-->
-        <div class="row-sm-6 fullrow12">
+        <div class="row-sm-6 fullrow12" id="fullrow12">
 
-            <!--Start Loop
-            <div class="col-sm-1 fullcol21" style="border-style: groove;padding: 0px;">
-
-                <div class="row-sm4 rowforUser">
-                    <div name="forUserNo">
-                        user no
-                    </div>
-                </div>
+            <!--Start Loop-->
+            <div id="mainContainer" class="col-sm-12 fullcol21" style="padding: 0px;">
 
             </div>
-            <div class="col-sm-3 fullcol22" style="border-style: groove;padding: 0px;">
-
-                <div class="row-sm4 rowforUser">
-                    <div name="forUserInfo">
-                        for user name surname
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-3 fullcol23"  style="border-style: groove;padding: 0px;">
-
-                <div class="row-sm4 rowforUser">
-                    <div name="forUserMailInfo">
-                        for user mail
-                    </div>
-                    <div name="forUserInfo">
-                        for user mail
-                    </div>
-                    <div name="forUserInfo">
-                        for user mail
-                    </div>
-                    <div name="forUserInfo">
-                        for user mail
-                    </div>
-                    <div name="forUserInfo">
-                        for user mail
-                    </div>
-                    <div name="forUserInfo">
-                        for user mail
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 fullcol24"  style="border-style: groove;padding: 0px;">
-
-                <div class="row-sm rowforUser">
-                    <div name="forUserPhoneInfo">
-                        for user phone
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 fullcol25" style="border-style: groove;padding: 0px;">
-
-                <div class="row-sm4 rowforUser">
-                    <div name="forUserInfo">
-                        <a href="#" class="btn btn-primary a-btn-slide-text">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                            <span><strong>Edit</strong></span>
-                        </a>
-                        <a href="#" class="btn btn-primary a-btn-slide-text">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            <span><strong>Delete</strong></span>
-                        </a>
-                    </div>
-                </div>
-            </div>-->
         </div>
+        <div class="row-sm-3 fullrow13">
 
+        </div>
+    </div>
 
         <!--for list and edit -->
-
-    </div>
     <!--USER INFO END-->
-    <div class="row-sm-3 fullrow13">
 
-    </div>
 
-</div>
-<div class="col-sm-1 fullcol13">
+    <div class="col-sm-2 fullcol13">
 
 </div>
 </div>
@@ -314,29 +270,76 @@
             "roles": []
         }
     ]
+
+
     $(document).ready(function () {
-        var temp = "";
+        var mainContainer = document.getElementById('mainContainer');
+        var id = "";
+        var tempDiv = "";
         for (var i in data) {
-            temp = ""
-            temp += "<div>";
-            temp += "<div>";
-            temp += "AD:" + data[i].name;
-            temp += "SOYAD:" + data[i].lastName;
-            temp += "Email:" + data[i].email;
-            temp += "Telefon:" + data[i].phone;
-            temp += "</div>";
-            temp += "</div>";
-            console.log(temp)
-            var tempDiv = temp;
-            $('<div class="row-sm-6 fullrow12">').html = tempDiv;
+            var user=data[i];
+            var name = user.name;
+            var lastName = user.lastName;
+            var email = user.email;
+            var phone = user.phone;
+            var temp = ""
+
+            temp += '<div id="rowUserInfo' + i + '" class="container" style="margin: 10px; background-color: whitesmoke; border-color: #bfbfbf;border-width: 1px;border-radius: 10px;height: 120px">';//container
+
+            temp +="<div class='col-sm-8' style='background-color: #ffe6ef;height: 100%'>";
+            temp +="<div style='font-w;background-color: #3960ff;height: 100%'>";//name
+            temp +="</div>";
+
+            temp +="<div style='font-w;background-color: #b827ff;height: 100%'>";//email bunun fontu küçük ve daha eğik
+            temp +="</div>";
+            temp +="</div>";
+
+            temp +="<div class='col-sm-4' style='background-color: #ffe6ef;height: 100%'>";
+            temp +="<div style='font-w;background-color: #43ff4e;height: 100%'>";//buton edit
+            temp +="</div>";
+            temp +="<div style='font-w;background-color: #faff47;height: 100%'>";//delete edit
+            temp +="</div>";
+
+            temp +="</div>";
+            temp +="</div>";
+
+            // temp += '<div class="col-sm-2" style="height: 100%">'; //2 col
+            // temp += i;
+            // temp += '</div>'; //--2 col
+            // temp += '<div class="col-sm-6" style="height: 100%">'; //6 col
+            // temp += '<div class="row-sm-2" >'; //blank
+            // temp += '</div>';
+            // temp += '<div class="row-sm-5" >'; //name-lastName
+            // temp += data[i].name + " " + data[i].lastName;
+            // temp += '</div>'; //--name-lastName
+            // temp += '<div class="row-sm-5">'; //email-phone
+            // temp += data[i].email + " " + data[i].phone;
+            // temp += '</div>';//--email-phone
+            // temp += '</div>';//--6col
+            // temp += '<div class="col-sm-4">'; //4 col
+            // temp += '<div class="row-sm">'; //edit
+            // // temp += '<a href="#" id="editButton" onclick="(function(){alert('+data[i].id+');})()" class="btn btn-primary a-btn-slide-text">';
+            // temp += '<a href="#" onclick="update(' + data[i].id + ')" class="btn btn-primary a-btn-slide-text">';
+            // temp += '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>';
+            // temp += "<span><strong>Edit</strong></span>";
+            // temp += '</a>';
+            // temp += '</div>';
+            // temp += '<div class="row-sm">'; //delete
+            // temp += '</a>';
+            // temp += '<a href="#" onclick="deleting(' + data[i].id + ')" class="btn btn-primary a-btn-slide-text">';
+            // temp += '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>';
+            // temp += '<span><strong>Delete</strong></span>';
+            // temp += '</a>';
+            // temp += '</div>';
+            // temp += '</div>';
+            temp += '</div>';
+
+            tempDiv += temp;
 
         }
 
-
-        function findByName() {
-
-        }
-
+        mainContainer.innerHTML = tempDiv;
+    })
         /*$.ajax({
             url: 'http://localhost:8080/listeApi',
 
@@ -357,6 +360,18 @@
             type: 'POST',
 
         });*/
-    });
+
+    function update(id) {
+        alert(id)
+    }
+
+    function deleting(id) {
+        alert(id)
+    }
+
 </script>
 </body>
+
+
+
+
