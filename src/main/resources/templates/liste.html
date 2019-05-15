@@ -13,7 +13,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <style type="text/css">
-
+/*
         html, body {
             background-color: #dddddd;
             height: 100%;
@@ -139,19 +139,19 @@
         }
         .userSearch{
             height: 25%;
-        }
+        }*/
     </style>
 </head>
 <body>
-<div class="row fullmain">
+<div class="container mainContainer " style="margin:0;height:100%;background-color: lightblue;width: 100% ">
 
-    <div class="col-sm-2 fullcol11">
+    <div class="col-sm-2 colMainLeft" style="margin:0;background-color: #8894e6;">
 
     </div>
     <div class="col-sm-8 fullcol12">
 
         <!--HEAD AND SEARCH-->
-        <div class="row-sm-3 fullrow11">
+        <div class="container containerHeder" style="margin:0;height:100%;background-color: #8894e6;width: 100%">
 
             <div class="row-sm-8 blank">
 
@@ -167,23 +167,17 @@
         </div>
         <!--HEAD AND SEARCH-->
         <!--USER INFO START-->
-        <div class="row-sm-6 fullrow12" id="fullrow12">
-
+        <div class="container containerCenter" id="fullrow12" style="margin:10px;height:100%;background-color: #dddddd;width: 100%">
             <!--Start Loop-->
             <div id="mainContainer" class="col-sm-12 fullcol21" style="padding: 0px;">
-
             </div>
         </div>
-        <div class="row-sm-3 fullrow13">
+        <div class="container containerFooter" style="margin:0;height:100%;background-color: #e6e53d;width: 100%">
 
         </div>
     </div>
 
-        <!--for list and edit -->
-    <!--USER INFO END-->
-
-
-    <div class="col-sm-2 fullcol13">
+    <div class="col-sm-2 colMainRight" style="margin:0;background-color: #21e633;">
 
 </div>
 </div>
@@ -287,17 +281,17 @@
             temp += '<div id="rowUserInfo' + i + '" class="container" style="margin: 10px; background-color: whitesmoke; border-color: #bfbfbf;border-width: 1px;border-radius: 10px;height: 120px">';//container
 
             temp +="<div class='col-sm-8' style='background-color: #ffe6ef;height: 100%'>";
-            temp +="<div style='font-w;background-color: #3960ff;height: 100%'>";//name
+            temp +="<div style='font-w;background-color: #3960ff;height: 50%'>";//name
             temp +="</div>";
 
-            temp +="<div style='font-w;background-color: #b827ff;height: 100%'>";//email bunun fontu küçük ve daha eğik
+            temp +="<div style='font-w;background-color: #b827ff;height: 50%'>";//email bunun fontu küçük ve daha eğik
             temp +="</div>";
             temp +="</div>";
 
             temp +="<div class='col-sm-4' style='background-color: #ffe6ef;height: 100%'>";
-            temp +="<div style='font-w;background-color: #43ff4e;height: 100%'>";//buton edit
+            temp +="<div style='font-w;background-color: #43ff4e;height: 50%'>";//buton edit
             temp +="</div>";
-            temp +="<div style='font-w;background-color: #faff47;height: 100%'>";//delete edit
+            temp +="<div style='font-w;background-color: #faff47;height: 50%'>";//delete edit
             temp +="</div>";
 
             temp +="</div>";
