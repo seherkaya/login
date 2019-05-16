@@ -113,22 +113,12 @@ public class LoginController {
                            @RequestParam(required = false, value = "email") String email,
                            @RequestParam(required = false, value = "password") String password,
                            @RequestParam(required = false, value = "phone") String phone,
-                           @RequestParam(required = false, value = "phone") int active
+                           @RequestParam(required = false, value = "phone") int active,
+                           @RequestBody User user
 
     ) {
-        User user = userService.findUserByID( id );
-        if (user != null) {
-            userService.updateUser(  id, name, lastName, email, password, phone, active );
-            ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setSuccessful( false );
-            return new Gson().toJson( apiResponse );
-        } else {
-            ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setSuccessful( false );
-            return new Gson().toJson( apiResponse );
-
-        }
-
+        int a=5;
+            return new Gson().toJson( userService.updateUser( user ));
 
     }
 

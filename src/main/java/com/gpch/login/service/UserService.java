@@ -1,21 +1,15 @@
 package com.gpch.login.service;
 
 import com.gpch.login.model.ApiResponse;
-import com.gpch.login.model.Role;
 import com.gpch.login.model.User;
 import com.gpch.login.repository.RoleRepository;
 import com.gpch.login.repository.UserRepository;
 import com.gpch.login.system.SystemGeneral;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import java.util.List;
-import java.util.Arrays;
-import java.util.HashSet;
 
 @Service
 public class UserService {
@@ -97,7 +91,12 @@ public class UserService {
         }
 
         User kaydedilecek = new User();
+        kaydedilecek.setName( user.getName() );
+        kaydedilecek.setLastName( user.getLastName());
+        kaydedilecek.setEmail( user.getEmail() );
         kaydedilecek.setPhone( user.getPhone() );
+        kaydedilecek.setPassword( user.getPassword() );
+        kaydedilecek.setActive( user.getActive() );
 
         User kaydedilen = userRepository.save( kaydedilecek );
         response.setSuccessful( true );
@@ -105,25 +104,46 @@ public class UserService {
         return response;
     }
 
-    public User updateUser(int id, String name, String lastName, String email, String password, String phone, int active) {
-        User user = userRepository.findById( id );
-        if (user==null){}
+    public ApiResponse updateUser(User user) {
+        ApiResponse response = new ApiResponse();
 
-        if (name != null)
-            user.setName( name );
-        if (lastName != null)
-            user.setLastName( lastName );
-        if (email != null)
-            user.setEmail( email );
-        if (password != null)
-            user.setPassword( password );
-        if (phone != null)
-            user.setPhone( phone );
-        if (active != 1 || active != 0)
-            user.setActive( active );
+        if (userRepository.findById( user.getId() ) != null) {
 
-        return userRepository.save( user );
+            if (user.getName() != null)
+                user.setName( user.getName() );
+            if (user.getLastName() != null)
+                user.setLastName( user.getLastName() );
+            if (user.getEmail() != null){
+                if (!SystemGeneral.validateEmail( user.getEmail() )) {
+                    response.setSuccessful( false );
+                    response.setMessage( "Email is not valid" );
+                    return response;
+                }
 
+                User existingUser = userRepository.findByEmail( user.getEmail() );
+                if (existingUser != null) {
+                    response.setSuccessful( false );
+                    response.setMessage( "User exists" );
+                    return response;
+                }
+            }
+                user.setEmail( user.getEmail() );
+            if (user.getPassword() != null)
+                user.setPassword( user.getPassword() );
+            if (user.getPhone() != null)
+                user.setPhone( user.getPhone() );
+            if (user.getActive() != 1 || user.getActive() != 0)
+                user.setActive( user.getActive() );
+            User kaydedilen = userRepository.save( user );
+            response.setSuccessful( true );
+            response.setData( kaydedilen );
+            return response;
+        } else {
+            response.setSuccessful( false );
+            response.setMessage( "This User not founded" );
+
+            return response;
+        }
     }
 
     public Boolean deleteUser(int id) {
