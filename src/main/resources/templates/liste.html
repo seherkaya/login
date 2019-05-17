@@ -14,6 +14,9 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <style type="text/css">
+        body{
+            background-color: #eee;
+        }
         .mainContainer {
             padding-right: 15px;
             padding-left: 15px;
@@ -63,6 +66,9 @@
         .userInfo:hover {
             border-color: #54a9bd;
         }
+        span:hover{
+            background-color: #1c8abd;
+        }
 
     </style>
 </head>
@@ -79,10 +85,10 @@
                         <div class="search form-group"
                              style="height:100%;border-style:groove;border-width: medium;border-radius: 10px;border-left-width: 0px;">
                             <div class="input-group">
-                                <span  onClick="listeDoldur();" class="icon glyphicon input-group-addon glyphicon-search"
-                                      style="height:100%;border-style:groove;border-width: medium;border-radius: 10px;"></span>
+                                <span  onClick="listeDoldur(str);" class="icon glyphicon input-group-addon glyphicon-search"
+                                      style="height:100%;border-style:groove;border-width: medium;border-radius: 10px; background-color: #489DBD"></span>
 
-                                <input type="text" id="inputSearch" onkeyup="listeDoldur()"
+                                <input type="text" id="inputSearch" onclick="listeDoldur(str)"
                                        class="search-field form-control" placeholder="Search" style="height: 100%">
                             </div>
                         </div>
@@ -103,43 +109,47 @@
     </div>
 </div>
 <script>
-    var user ={name :""
-        las
+    var str="";
+    $(document).ready(function () {
+        $.ajax({
+            url: 'http://localhost:8080/listeAPI?',
+            contentType: 'application/json',
+            traditional: true,
+/*            data: JSON.stringify(),*/
+            dataType: 'json',
+            processData: false,
+            type: 'POST',
+            success: function (data) {
+                var status;
+                 str = data.data;
+                console.log(str);
+                listeCek(str);
+                if (status == 0)
+                    console.log("device control succeeded");
+            },
+            error: function (data) {
+                console.log("Device control failed" +data);
+            },
 
+
+        });
+        //listeDoldur(data);
+
+
+    })
+
+    function listeCek(str){
+
+        listeDoldur(str);
     }
-    $.ajax({
-        url: 'http://localhost:8080/listeApi',
 
-        contentType: 'application/json',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        success: function (data) {
-            var status;
-            data.json().parse(data)
-            var str = JSON.parse(data)
-            if (status == 0)
-                console.log("device control succeeded");
-        },
-        error: function () {
-            console.log("Device control failed");
-        },
-        processData: false,
-        type: 'POST',
-
-    });
-
-    function listeCek(){
-
-        listeDoldur();
-    }
-
-    function listeDoldur() {
+    function listeDoldur(str) {
         var mainContainer = document.getElementById('mainContainer');
         var tempDiv = "";
         var currentQuery = inputSearch.value;
 
-        for (var i in data) {
-            var user = data[i];
+        for (var i in str) {
+            var user = str[i];
             var name = user.name;
             var lastName = user.lastName;
             var email = user.email;
@@ -192,11 +202,7 @@
     }
 
 
-    $(document).ready(function () {
-        listeDoldur();
 
-
-    })
 
     function update(id) {
         alert(id)

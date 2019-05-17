@@ -51,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/kullanici").permitAll()
                 .antMatchers("/kullaniciOlustur").permitAll()
                 .antMatchers("/sayfa").permitAll()
+                .antMatchers("/giris").permitAll()
                 .antMatchers("/kullaniciIslemleriAPI").permitAll()
                 .antMatchers("/kayit").permitAll()
                 .antMatchers("/yeniKullaniciAPI").permitAll()

@@ -72,6 +72,11 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/giris", method = RequestMethod.GET)
+    public String giris() {
+        return "giris";
+    }
+
     @RequestMapping(value = "/kayit", method = RequestMethod.GET)
     public String kullancici() {
         return "kayit";
