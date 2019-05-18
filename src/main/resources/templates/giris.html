@@ -67,10 +67,6 @@
         }
 
         /* Styles for CodePen Demo Only */
-        #wrapper {
-            max-width: 500px;
-            margin: auto;
-        }
 
         .btn-lg, .btn-group-lg > .btn {
             padding: 10px 16px;
@@ -81,22 +77,42 @@
             height: 40px;
         }
 
+        .col-md-offset-3 {
+            margin-left: 0px;
+        }
+
+        #password1 + .glyphicon {
+            cursor: pointer;
+            pointer-events: all;
+        }
+        #password2 + .glyphicon {
+            cursor: pointer;
+            pointer-events: all;
+        }
+
+        /* Styles for CodePen Demo Only */
+        .wrapper {
+            max-width: 500px;
+            margin: auto;
+        }
+
     </style>
 </head>
 <body>
+<div id="login">
 <div class="col-sm-3">
 
 </div>
 <div class="col-sm-6">
     <div class="centerDiv">
 
-        <!--<div class="InfoDiv" style="height: 33%">
+        <div class="InfoDiv" style="height: 33%">
             <div class="col-sm-4">
 
             </div>
             <div class="col-sm-4">
 
-                <img src="admin.png" class="img-responsive">
+                <img src="/images/admin.png" class="img-responsive">
                 <h1><b> LOGIN</b></h1>
             </div>
             <div class="col-sm-4">
@@ -120,13 +136,8 @@
                 </div>
 
                 <div class="forButtonRow">
-                    <div class="col-sm-4">
-                    </div>
-                    <div class="col-sm-4">
-                    </div>
-                    <div class="col-sm-4" style="padding: 0px;">
+
                         <button type="button" class="btn btn-primary btn-lg">Giriş</button>
-                    </div>
 
                 </div>
 
@@ -142,13 +153,68 @@
                 <p style="text-align: center;"> Registration
                 </p></a>
         </div>
-        <div class="col-sm-4"></div>-->
+        <div class="col-sm-4"></div>
 
     </div>
 
 </div>
 <div class="col-sm-3">
 
+</div>
+</div>
+
+<div id="registration" style="display: none;">
+    <div class="col-sm-3">
+
+    </div>
+    <div class="col-sm-6">
+        <div class="centerDiv">
+            <div class="col-sm-3 mainLeftCon" style="height: 100%">
+            </div>
+            <div class="col-md-6 col-md-offset-3" style="height: 100%">
+                <div>
+                    <img src="/images/admin.png" class="img-responsive">
+                    <h1><b> REGISTRATION</b></h1>
+                </div>
+                <div class="registrationInfo" style="  margin-top: 10px;">
+                    <input type="text" class="form-control" placeholder="Name" required="">
+                </div>
+                <div class="registrationInfo">
+                    <input type="text" class="form-control" placeholder="Surnam" required="">
+                </div>
+                <div class="registrationInfo">
+                    <input type="text" class="form-control" placeholder="E-mail" required="">
+                </div>
+                <div class="wrapper">
+                    <div class="form-group has-feedback">
+                        <input type="password" class="form-control" id="password1" placeholder="Password">
+                        <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="form-group has-feedback">
+                        <input type="password" class="form-control" id="password2" placeholder="Password Again">
+                        <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                    </div>
+                </div>
+                <div class="registrationInfo">
+                    <input type="text" class="form-control" placeholder="Phone" required="">
+                </div>
+                <div class="registrationInfo">
+                    <input type="radio" name="gender" value="male" ><i>I agree to the Privacy Policy</i> <br>
+
+                </div>
+                <div class="registrationInfo" style="margin-top: 15px">
+                    <button id="submit" type="button" class="btn btn-primary btn-lg">Kayıt Ol</button>
+                </div>
+            </div>
+            <div class="col-sm-3 mainRightCon" style="height: 100%">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -157,14 +223,14 @@
         $("#submit").click(function () {
             $(".error").hide();
             var hasError = false;
-            var passwordVal = $("#password").val();
+            var passwordVal = $("#password1").val();
             var checkVal = $("#password2").val();
             // if (passwordVal.length < 8 || passwordVal.length < 8) {
             //     $("#password").after('<span class="error">Lütfen paralonızı 8 karakterdem fazla girin.</span>');
             //     hasError = true;
             // }
             if (passwordVal == '') {
-                $("#password").after('<span class="error">Lütfen paralonızı giriniz.</span>');
+                $("#password1").after('<span class="error">Lütfen paralonızı giriniz.</span>');
                 hasError = true;
 
             } else if (checkVal == '') {
@@ -182,7 +248,7 @@
                     "name": $("#name").val(),
                     "lastName": $("#lastName").val(),
                     "email": $("#email").val(),
-                    "password": $("#password").val(),
+                    "password": $("#password1").val(),
                     "phone": $("#phone").val()
                 };
                 $.ajax({
@@ -209,8 +275,23 @@
         $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
         $('#password').togglePassword(); // activate the hideShowPassword plugin
     });
+    $('#password1 + .glyphicon').on('click', function () {
+        $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
+        $('#password1').togglePassword(); // activate the hideShowPassword plugin
+    });
+    $('#password2 + .glyphicon').on('click', function () {
+        $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
+        $('#password2').togglePassword(); // activate the hideShowPassword plugin
+    });
 
     function reloadForm() {
+        var x = document.getElementById("login");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+            document.getElementById('registration').style.display = "block";
+        }
     }
 
 </script>
