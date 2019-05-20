@@ -12,6 +12,12 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
     <style type="text/css">
         h1 {
             color: #1B7EB5;
@@ -93,59 +99,60 @@
         /* Styles for CodePen Demo Only */
         .wrapper {
             max-width: 500px;
-            margin: auto;
         }
 
     </style>
 </head>
 <body>
-<div id="login">
+<div id="loginPage">
 <div class="col-sm-3">
-
 </div>
 <div class="col-sm-6">
     <div class="centerDiv">
+        <div class="col-sm-12">
 
-        <div class="InfoDiv" style="height: 33%">
             <div class="col-sm-4">
 
             </div>
             <div class="col-sm-4">
 
                 <img src="/images/admin.png" class="img-responsive">
-                <h1><b> LOGIN</b></h1>
+
             </div>
             <div class="col-sm-4">
-
-            </div>
-
+        </div>
         </div>
         <div>
             <div class="col-sm-3" style="height: 33%">
             </div>
             <div class="col-sm-6" style="height: 33%">
+                <h1  style="margin-top: 75px"><b> LOGIN</b></h1>
                 <div>
-                    <input type="text" class="form-control" placeholder="E-mail" required="">
+                    <input id="emailLogin" type="text" class="form-control" placeholder="E-mail" required="">
                 </div>
 
                 <div id="wrapper">
                     <div class="form-group has-feedback">
                         <input type="password" class="form-control" id="password" placeholder="Password">
-                        <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                        <i style="display: block;" class="glyphicon glyphicon-eye-open form-control-feedback"></i>
                     </div>
                 </div>
-
                 <div class="forButtonRow">
-
-                        <button type="button" class="btn btn-primary btn-lg">Giriş</button>
-
+                    <button id="login" type="button" class="btn btn-primary btn-lg">LOGIN</button>
+                </div>
+                <div id="succeed" style="display: none; margin-top: 5px">
+                    <div class="col-sm-2"><img src="/images/giris-basarili.png" class="img-responsive"></div>
+                    <div class="col-sm-10"><p sytle="color:black"><b> Succeed </b></p></div>
+                </div>
+                <div id="failed" style="display: none; margin-top: 5px">
+                    <div class="col-sm-2"><img src="/images/giris-hatali.png" class="img-responsive"></div>
+                    <div class="col-sm-10"><p sytle="color:black"><b> Failed </b></p></div>
                 </div>
 
             </div>
             <div class="col-sm-3" style="height: 33%">
             </div>
         </div>
-
         <div class="col-sm-4"></div>
         <div class="col-sm-4" style="padding-top: 25%" onclick="reloadForm()">
             <p>Already have an account?</p>
@@ -154,75 +161,158 @@
                 </p></a>
         </div>
         <div class="col-sm-4"></div>
-
     </div>
-
 </div>
 <div class="col-sm-3">
-
 </div>
 </div>
-
-<div id="registration" style="display: none;">
+<div id="registrationPage" style="display: none;">
     <div class="col-sm-3">
-
     </div>
     <div class="col-sm-6">
         <div class="centerDiv">
-            <div class="col-sm-3 mainLeftCon" style="height: 100%">
+            <div class="col-sm-12">
+                <div class="col-sm-4">
             </div>
-            <div class="col-md-6 col-md-offset-3" style="height: 100%">
-                <div>
+                <div class="col-sm-4">
                     <img src="/images/admin.png" class="img-responsive">
-                    <h1><b> REGISTRATION</b></h1>
-                </div>
-                <div class="registrationInfo" style="  margin-top: 10px;">
-                    <input type="text" class="form-control" placeholder="Name" required="">
-                </div>
-                <div class="registrationInfo">
-                    <input type="text" class="form-control" placeholder="Surnam" required="">
-                </div>
-                <div class="registrationInfo">
-                    <input type="text" class="form-control" placeholder="E-mail" required="">
-                </div>
-                <div class="wrapper">
-                    <div class="form-group has-feedback">
-                        <input type="password" class="form-control" id="password1" placeholder="Password">
-                        <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
-                    </div>
-                </div>
-                <div class="wrapper">
-                    <div class="form-group has-feedback">
-                        <input type="password" class="form-control" id="password2" placeholder="Password Again">
-                        <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
-                    </div>
-                </div>
-                <div class="registrationInfo">
-                    <input type="text" class="form-control" placeholder="Phone" required="">
-                </div>
-                <div class="registrationInfo">
-                    <input type="radio" name="gender" value="male" ><i>I agree to the Privacy Policy</i> <br>
 
                 </div>
-                <div class="registrationInfo" style="margin-top: 15px">
-                    <button id="submit" type="button" class="btn btn-primary btn-lg">Kayıt Ol</button>
+                <div class="col-sm-4">
                 </div>
             </div>
-            <div class="col-sm-3 mainRightCon" style="height: 100%">
+            <div class="col-sm-12" style="height: 33%; margin-top: 50px;">
+                <div class="col-sm-3" style="height: 33%;">
+                </div>
+                <div class="col-sm-6" style="height: 33%">
+                    <h1><b> REGISTRATION </b></h1>
+                    <div class="registrationInfo" style=" ">
+                        <input id="name" type="text" class="form-control" placeholder="Name" required="">
+                    </div>
+                    <div class="registrationInfo">
+                        <input id="lastName" type="text" class="form-control" placeholder="Surnam" required="">
+                    </div>
+                    <div class="registrationInfo">
+                        <input id="email" type="text" class="form-control" placeholder="E-mail" required="">
+                    </div>
+                    <div class="wrapper">
+                        <div class="form-group has-feedback">
+                            <input type="password" class="form-control" id="password1"
+                                   placeholder="Password"  style="margin-bottom: 7px">
+                            <i id=togOpen class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                            <i id=togClose style="display: none;"
+                               class="glyphicon glyphicon-eye-close form-control-feedback"></i>
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <div class="form-group has-feedback">
+                            <input type="password" class="form-control" id="password2"
+                                   placeholder="Password Again" style="margin-bottom: 7px">
+                            <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                            <i style="display: none;" class="glyphicon-eye-close form-control-feedback"></i>
+                        </div>
+                    </div>
+                    <div class="registrationInfo">
+                        <input id="phone" type="text" class="form-control" placeholder="Phone" required="">
+                    </div>
+                    <div id="missingField" style="margin-top: 5px; display: none;">
+                        <div class="col-sm-2">
+                            <img src="/images/giris-hatali.png" class="img-responsive">
+                        </div>
+                        <div class="col-sm-10">
+                            <p style="color:black;"><b> Failed </b></p>
+                        </div>
+                    </div>
+                    <div id="succeesRegistration" style="margin-top: 5px; display: none;">
+                        <div class="col-sm-2">
+                            <img src="/images/giris-basarili.png" class="img-responsive">
+                        </div>
+                        <div class="col-sm-10">
+                            <p style="color:black;"><b> Succeed </b></p>
+                        </div>
+                    </div>
+                    <div class="registrationInfo">
+                        <input style=" margin-top: 15px; margin-bottom: 15px" id="checkType" type="radio" name="gender" value="male"><i>I agree to the Privacy
+                        Policy</i> <br>
+
+                    </div>
+                    <div class="registrationInfo" style="margin-top: 15px">
+                        <button id="submit" type="button" class="btn btn-primary btn-lg">REGISTER</button>
+                    </div>
+                </div>
+                <div class="col-sm-3" style="height: 33%">
+                </div>
             </div>
         </div>
     </div>
     <div class="col-sm-3">
-
     </div>
 </div>
 
 <script type="text/javascript">
+
     $(document).ready(function () {
 
+
+        $("#login").click(function () {
+            var userLogin = {
+                "email": $("#emailLogin").val(),
+                "password": $("#password").val()
+            };
+            $.ajax({
+
+                url: 'http://localhost:8080/girisAPI',
+                contentType: 'application/json',
+                data: JSON.stringify(userLogin),
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.successful == true) {
+                        var x = document.getElementById("loginPage");
+                        if (x.style.display === "none") {
+                            x.style.display = "block";
+                            document.getElementById('failed').style.display = "none";
+                        } else {
+                            x.style.display = "block";
+                            document.getElementById('succeed').style.display = "block";
+                            document.getElementById('failed').style.display = "none";
+                        }
+                    }
+                    else {
+                        var x = document.getElementById("loginPage");
+                        if (x.style.display === "none") {
+                            x.style.display = "block";
+                            document.getElementById('succeed').style.display = "none";
+                        } else {
+                            x.style.display = "block";
+                            document.getElementById('failed').style.display = "block";
+                            document.getElementById('succeed').style.display = "none";
+                        }
+
+                    }
+                    console.log("device control succeeded");
+
+
+                },
+                error: function () {
+                    console.log("Device control failed");
+                },
+                processData: false,
+                type: 'POST',
+
+            });
+        });
         $("#submit").click(function () {
+            var user = {
+                "name": $("#name").val(),
+                "lastName": $("#lastName").val(),
+                "email": $("#email").val(),
+                "password": $("#password1").val(),
+                "phone": $("#phone").val()
+            };
             $(".error").hide();
             var hasError = false;
+            var errorType = "";
             var passwordVal = $("#password1").val();
             var checkVal = $("#password2").val();
             // if (passwordVal.length < 8 || passwordVal.length < 8) {
@@ -240,23 +330,55 @@
                 $("#password2").after('<span class="error">Parolanız eşleşmedi.</span>');
                 hasError = true;
             }
-            else if (hasError == true) {
-                return false;
+            else if (user.name == '' || user.lastName == '' || user.password == '' || user.email == '' || user.phone == '') {
+                hasError = true;
+                errorType = "hasExist";
             }
+            else if (document.getElementById("checkType").checked != true) {
+                hasError = true;
+            }
+            if (hasError == true) {
+                var x = document.getElementById("registrationPage");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                    document.getElementById('succeesRegistration').style.display = "none";
+                } else {
+                    x.style.display = "block";
+                    document.getElementById('missingField').style.display = "block";
+                    document.getElementById('succeesRegistration').style.display = "none";
+                }
+            }
+
             else {
-                var user = {
-                    "name": $("#name").val(),
-                    "lastName": $("#lastName").val(),
-                    "email": $("#email").val(),
-                    "password": $("#password1").val(),
-                    "phone": $("#phone").val()
-                };
+
                 $.ajax({
                     url: 'http://localhost:8080/yeniKullaniciAPI',
                     contentType: 'application/json',
                     data: JSON.stringify(user),
                     dataType: 'json',
                     success: function (data) {
+                        if (data.successful == true) {
+                            var x = document.getElementById("registrationPage");
+                            if (x.style.display === "none") {
+                                x.style.display = "block";
+                                document.getElementById('missingField').style.display = "none";
+                            } else {
+                                x.style.display = "block";
+                                document.getElementById('succeesRegistration').style.display = "block";
+                                document.getElementById('missingField').style.display = "none";
+                            }
+                        }
+                        else {
+                            var x = document.getElementById("registrationPage");
+                            if (x.style.display === "none") {
+                                x.style.display = "block";
+                                document.getElementById('succeesRegistration').style.display = "none";
+                            } else {
+                                x.style.display = "block";
+                                document.getElementById('missingField').style.display = "block";
+                                document.getElementById('succeesRegistration').style.display = "none";
+                            }
+                        }
                         console.log("device control succeeded");
                     },
                     error: function () {
@@ -269,31 +391,54 @@
             }
         });
     });
+
     // $( "#result" ).html( data );
 
     $('#password + .glyphicon').on('click', function () {
-        $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
-        $('#password').togglePassword(); // activate the hideShowPassword plugin
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+            x.type = "text";
+        }
+        else {
+            $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+            x.type = "password";
+        }
+        /*         // toggle our classes for the eye icon
+                $('#password').togglePassword(); // activate the hideShowPassword plugin*/
     });
     $('#password1 + .glyphicon').on('click', function () {
-        $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
-        $('#password1').togglePassword(); // activate the hideShowPassword plugin
+        var x = document.getElementById("password1");
+        if (x.type === "password") {
+            $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+            x.type = "text";
+        } else {
+            $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+            x.type = "password";
+        }
     });
     $('#password2 + .glyphicon').on('click', function () {
-        $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
-        $('#password2').togglePassword(); // activate the hideShowPassword plugin
+        var x = document.getElementById("password2");
+        if (x.type === "password") {
+            $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+            x.type = "text";
+        } else {
+            $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+            x.type = "password";
+        }
     });
 
     function reloadForm() {
-        var x = document.getElementById("login");
+        var x = document.getElementById("loginPage");
         if (x.style.display === "none") {
             x.style.display = "block";
         } else {
             x.style.display = "none";
-            document.getElementById('registration').style.display = "block";
+            document.getElementById('registrationPage').style.display = "block";
         }
     }
 
 </script>
 </body>
 </html>
+

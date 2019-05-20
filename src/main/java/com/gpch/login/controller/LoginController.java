@@ -76,6 +76,12 @@ public class LoginController {
     public String giris() {
         return "giris";
     }
+    @ResponseBody
+    @RequestMapping(value = "/girisAPI", method = RequestMethod.POST)
+    public String giris(@RequestBody User user)
+    {
+        return new Gson().toJson( userService.login( user));
+    }
 
     @RequestMapping(value = "/kayit", method = RequestMethod.GET)
     public String kullancici() {
@@ -141,28 +147,10 @@ public class LoginController {
                       @RequestParam(required = false, value = "email") String email,
                       @RequestParam(required = false, value = "password") String password,
                       @RequestParam(required = false, value = "phone") String phone,
-                      @RequestParam(required = false, value = "phone") int active
+                      @RequestParam(required = false, value = "phone") int active,User user
     ) {
-        User user = userService.findUserByID( id );
-        if (user != null) {
-            boolean i = userService.deleteUser( id );
-            if (i == true) {
-                ApiResponse apiResponse = new ApiResponse();
-                apiResponse.setSuccessful( true );
-                return new Gson().toJson( apiResponse );
-            } else {
-                ApiResponse apiResponse = new ApiResponse();
-                apiResponse.setSuccessful( false );
-                return new Gson().toJson( apiResponse );
 
-            }
-        } else {
-            ApiResponse apiResponse = new ApiResponse();
-            apiResponse.setSuccessful( false );
-            return new Gson().toJson( apiResponse );
-
-        }
-
+           return new Gson().toJson(userService.deleteUser( user ));
 
     }
 

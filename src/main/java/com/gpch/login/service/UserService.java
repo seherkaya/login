@@ -22,11 +22,15 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User findUserByEmail(String email) {
-        return userRepository.findByEmail( email );
+        User user =userRepository.findByEmail( email );
+        user.setPassword( "" );
+        return user ;
     }
 
     public User findUserByID(int id) {
-        return userRepository.findById( id );
+        User user = userRepository.findById( id );
+        user.setPassword("");
+        return user;
     }
 
     public List<User> findUserByName(String name) {
@@ -49,7 +53,6 @@ public class UserService {
         return user;
     }
 
-
     public ApiResponse searchAll(String name) {
         ApiResponse response = new ApiResponse();
 
@@ -71,6 +74,28 @@ public class UserService {
         return response;
     }
 
+    public ApiResponse login (User user) {
+        ApiResponse response = new ApiResponse();
+        User userExist =userRepository.findByEmail( user.getEmail() );
+        if(userExist!= null)
+        {
+            if(userExist.getPassword().equalsIgnoreCase(user.getPassword()  )){
+                response.setSuccessful( true );
+                response.setMessage( "User deleted" );
+                return response;
+
+            }else {
+                response.setSuccessful( false );
+                response.setMessage( "User password is not valid" );
+                return response;
+            }
+        }else{
+
+            response.setSuccessful( false );
+            response.setMessage( "Email is not valid" );
+            return response;
+        }
+    }
 
     public ApiResponse saveUser(User user) {
         ApiResponse response = new ApiResponse();
@@ -146,13 +171,22 @@ public class UserService {
         }
     }
 
-    public Boolean deleteUser(int id) {
-        User user = userRepository.findById( id );
-        userRepository.delete( user );
-        return true;
+    public ApiResponse deleteUser(User user) {
+        ApiResponse response = new ApiResponse();
+        User silinecek = userRepository.findById( user.getId() );
 
+        if (silinecek != null) {
+
+            userRepository.delete( silinecek );
+            response.setSuccessful( true );
+            response.setMessage( "User deleted" );
+            return response;
+        } else {
+            response.setSuccessful( false );
+            response.setMessage( "User exists" );
+            return response;
+        }
     }
-
 
     public List<User> getByNameUser(String name) {
 

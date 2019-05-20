@@ -52,17 +52,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/kullaniciOlustur").permitAll()
                 .antMatchers("/sayfa").permitAll()
                 .antMatchers("/giris").permitAll()
+                .antMatchers("/girisAPI").permitAll()
                 .antMatchers("/kullaniciIslemleriAPI").permitAll()
                 .antMatchers("/kayit").permitAll()
                 .antMatchers("/yeniKullaniciAPI").permitAll()
                 .antMatchers("/liste").permitAll()
                 .antMatchers("/listeAPI").permitAll()
-
                 .antMatchers("/guncelle").permitAll()
                 .antMatchers("/guncelleAPI").permitAll()
                 .antMatchers("/sil").permitAll()
                 .antMatchers("/silAPI").permitAll()
+
                 .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 .defaultSuccessUrl("/admin/home")
