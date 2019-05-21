@@ -128,12 +128,12 @@
             <div class="col-sm-6" style="height: 33%">
                 <h1  style="margin-top: 75px"><b> LOGIN</b></h1>
                 <div>
-                    <input id="emailLogin" type="text" class="form-control" placeholder="E-mail" required="">
+                    <input id="emailLogin" type="text" class="form-control" placeholder="E-mail" required="" value="kayaseher1994@gmail.com">
                 </div>
 
                 <div id="wrapper">
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" placeholder="Password" value="123456">
                         <i style="display: block;" class="glyphicon glyphicon-eye-open form-control-feedback"></i>
                     </div>
                 </div>
@@ -250,15 +250,22 @@
 </div>
 
 <script type="text/javascript">
-
     $(document).ready(function () {
-
-
         $("#login").click(function () {
             var userLogin = {
                 "email": $("#emailLogin").val(),
                 "password": $("#password").val()
+
             };
+            var ekdata={
+                data1:"asdasd"
+            }
+            var merged={
+                user:userLogin,
+                ekdata:ekdata,
+                strTest:"asdasd adasd"
+
+            }
             $.ajax({
 
                 url: 'http://localhost:8080/girisAPI',
@@ -277,8 +284,21 @@
                             document.getElementById('succeed').style.display = "block";
                             document.getElementById('failed').style.display = "none";
                         }
+
+                        console.log(data);
+                        if(data.Objectdata[0].role="USER"){
+                            window.location.href = "http://localhost:8080/liste";
+                        }
+                        else if(data.Objectdata[0].role="ADMIN"){
+
+                        }
+                        else {
+                            console.log("Yetki Yoktur!!!")
+                        }
+
                     }
                     else {
+                        console.log(data);
                         var x = document.getElementById("loginPage");
                         if (x.style.display === "none") {
                             x.style.display = "block";
@@ -289,13 +309,23 @@
                             document.getElementById('succeed').style.display = "none";
                         }
 
+                       /* */
+
                     }
                     console.log("device control succeeded");
 
 
                 },
                 error: function () {
-                    console.log("Device control failed");
+                    var x = document.getElementById("loginPage");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                        document.getElementById('succeed').style.display = "none";
+                    } else {
+                        x.style.display = "block";
+                        document.getElementById('failed').style.display = "block";
+                        document.getElementById('succeed').style.display = "none";
+                    }
                 },
                 processData: false,
                 type: 'POST',

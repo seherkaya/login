@@ -1,11 +1,18 @@
 package com.gpch.login.model;
 
-public class ApiResponse {
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Set;
+
+public class ApiResponse  {
+
 
     private Boolean successful;
     private int status;
     private String message;
-    private Object data;
+    private Object Objectdata;
+
+
+    public ApiResponse() {}
 
     public Boolean getSuccessful() {
         return successful;
@@ -32,11 +39,12 @@ public class ApiResponse {
     }
 
     public Object getData() {
-        return data;
+        return Objectdata;
     }
 
     public void setData(Object data) {
-        this.data = data;
+        this.Objectdata = data;
     }
+
 
 }

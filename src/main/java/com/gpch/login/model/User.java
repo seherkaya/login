@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -31,7 +30,7 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
+    @Length(min = 8, message = "*Your password must have at least 8 characters")
     @NotEmpty(message = "*Please provide your password")
     private String password;
 
@@ -53,6 +52,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
 
     public int getId() {
         return id;
@@ -101,5 +101,14 @@ public class User {
     public void setActive(int active) {
         this.active = active;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 
 }

@@ -46,6 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/test").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/kullanici").permitAll()
@@ -56,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/kullaniciIslemleriAPI").permitAll()
                 .antMatchers("/kayit").permitAll()
                 .antMatchers("/yeniKullaniciAPI").permitAll()
-                .antMatchers("/liste").permitAll()
+                .antMatchers("/liste").permitAll()//.hasAnyAuthority(  "USER","ADMIN" )
                 .antMatchers("/listeAPI").permitAll()
                 .antMatchers("/guncelle").permitAll()
                 .antMatchers("/guncelleAPI").permitAll()
@@ -66,8 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
 
                 .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/admin/home")
+                .loginPage("/giris").failureUrl("/giris?error=true")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()

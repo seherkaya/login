@@ -100,6 +100,42 @@
                     <!--Start Loop-->
                     <div id="mainContainer" class="col-sm-12 fullcol21" style="padding: 0px;">
                     </div>
+                    <div id="employee_grid-footer" class="bootgrid-footer container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="pagination">
+                                    <li class="first disabled" aria-disabled="true">
+                                        <a href="#first" class="button">«</a>
+                                    </li>
+                                    <li class="prev disabled" aria-disabled="true">
+                                        <a href="#prev" class="button"><</a>
+                                    </li>
+                                    <li class="page-1 active" aria-disabled="false" aria-selected="true">
+                                        <a href="#1" class="button">1</a>
+                                    </li>
+                                    <li class="page-2" aria-disabled="false" aria-selected="false">
+                                        <a href="#2" class="button">2</a>
+                                    </li>
+                                    <li class="page-3" aria-disabled="false" aria-selected="false">
+                                        <a href="#3" class="button">3</a>
+                                    </li>
+                                    <li class="page-4" aria-disabled="false" aria-selected="false">
+                                        <a href="#4" class="button">4</a>
+                                    </li>
+                                    <li class="page-5" aria-disabled="false" aria-selected="false">
+                                        <a href="#5" class="button">5</a>
+                                    </li>
+                                    <li class="next" aria-disabled="false">
+                                        <a href="#next" class="button">></a>
+                                    </li>
+                                    <li class="last" aria-disabled="false">
+                                        <a href="#last" class="button">»</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,6 +147,7 @@
 <script>
     var str="";
     $(document).ready(function () {
+
         $.ajax({
             url: 'http://localhost:8080/listeAPI?',
             contentType: 'application/json',
@@ -121,7 +158,7 @@
             type: 'POST',
             success: function (data) {
                 var status;
-                 str = data.data;
+                 str = data.Objectdata;
                 console.log(str);
                 listeCek(str);
                 if (status == 0)
@@ -134,7 +171,6 @@
 
         });
         //listeDoldur(data);
-
 
     })
 
