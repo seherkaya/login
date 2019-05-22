@@ -1,9 +1,6 @@
 package com.gpch.login.service;
 
-import com.gpch.login.model.ApiResponse;
-import com.gpch.login.model.Role;
-import com.gpch.login.model.User;
-import com.gpch.login.model.projectEnum;
+import com.gpch.login.model.*;
 import com.gpch.login.repository.RoleRepository;
 import com.gpch.login.repository.UserRepository;
 import com.gpch.login.system.SystemGeneral;
@@ -56,20 +53,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse searchAll(String name) {
+    public ApiResponse searchAll(String name, Integer pageNo) {
         ApiResponse response = new ApiResponse();
 
         List<User> list;
+        Page page;
+        CustomPageable cs ;
         if (name != null) {
-            list = userRepository.findByName( name );
+      //      list = userRepository.findByName( name );
+            //page= userRepository.findByName( name,PageRequest.of( pageNo,5) );
+            cs= new CustomPageable(userRepository.findByName( name,PageRequest.of( pageNo,5) ));
         } else {
-            list = userRepository.findAll();
+      //      list = userRepository.findAll();
+            //page= userRepository.findAll( PageRequest.of( pageNo,5) );
+            cs= new CustomPageable(userRepository.findAll(PageRequest.of( pageNo,5)));
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            list.get( i ).setPassword( null );
+//        for (int i = 0; i < list.size(); i++) {
+//          //  list.get( i ).setPassword( null );
+//        }
+      /*  for (int i = 0; i < page.getSize(); i++) {
+            ((User) page.getContent().get( i )).setPassword( null );
+
+        }*/
+        for (int i = 0; i < cs.getList().size(); i++) {
+            ((User) cs.getList().get( i )).setPassword( null );
+
         }
-        response.setData( list );
+        response.setData( cs );
         response.setSuccessful( true );
 
         return response;

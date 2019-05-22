@@ -40,8 +40,6 @@ public class LoginController {
             return new Gson().toJson( userServiceImpl.saveUser( user, projectEnum.Roles.USER ) );
     }
 
-
-
 }
 
 

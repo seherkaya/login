@@ -18,7 +18,7 @@ public interface UserService {
 
     List<User> findAllUser();
 
-    ApiResponse searchAll(String name);
+    ApiResponse searchAll(String name,Integer pageNo);
 
     ApiResponse login (User user);
 

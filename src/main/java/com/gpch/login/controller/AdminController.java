@@ -20,8 +20,9 @@ public class AdminController {
     // return new Gson().toJson( user );
     @ResponseBody //This annotation provides to return String from method
     @RequestMapping(value = "/listeAPI", method = RequestMethod.POST)
-    public String listeDondur(@RequestParam(required = false, value = "name") String name) {
-        return new Gson().toJson( userServiceImpl.searchAll( name ) );
+    public String listeDondur(@RequestParam(required = false, value = "name") String name,
+                              @RequestParam( required = true, value = "pageNo") int pageNo) {
+        return new Gson().toJson( userServiceImpl.searchAll( name,pageNo ) );
     }
 
     @RequestMapping(value = "/guncelle", method = RequestMethod.GET)
