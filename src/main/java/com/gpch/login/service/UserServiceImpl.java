@@ -5,12 +5,10 @@ import com.gpch.login.repository.RoleRepository;
 import com.gpch.login.repository.UserRepository;
 import com.gpch.login.system.SystemGeneral;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -150,35 +148,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public ApiResponse updateUser(User user) {
         ApiResponse response = new ApiResponse();
+        User existingUser = userRepository.findById( user.getId() );
 
-        if (userRepository.findById( user.getId() ) != null) {
+        if (existingUser !=null){
 
             if (user.getName() != null)
-                user.setName( user.getName() );
+                existingUser.setName( user.getName() );
             if (user.getLastName() != null)
-                user.setLastName( user.getLastName() );
+                existingUser.setLastName( user.getLastName() );
             if (user.getEmail() != null){
                 if (!SystemGeneral.validateEmail( user.getEmail() )) {
                     response.setSuccessful( false );
                     response.setMessage( "Email is not valid" );
                     return response;
                 }
-
-                User existingUser = userRepository.findByEmail( user.getEmail() );
-                if (existingUser != null) {
-                    response.setSuccessful( false );
-                    response.setMessage( "User exists" );
-                    return response;
-                }
             }
-                user.setEmail( user.getEmail() );
+            existingUser.setEmail( user.getEmail() );
             if (user.getPassword() != null)
-                user.setPassword( bCryptPasswordEncoder.encode(user.getPassword()));
+                existingUser.setPassword( bCryptPasswordEncoder.encode(user.getPassword()));
             if (user.getPhone() != null)
-                user.setPhone( user.getPhone() );
+                existingUser.setPhone( user.getPhone() );
             if (user.getActive() != 1 || user.getActive() != 0)
-                user.setActive( user.getActive() );
-            User kaydedilen = userRepository.save( user );
+                existingUser.setActive( user.getActive() );
+            User kaydedilen = userRepository.save( existingUser );
             response.setSuccessful( true );
             response.setData( kaydedilen );
             return response;
